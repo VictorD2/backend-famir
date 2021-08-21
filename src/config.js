@@ -6,7 +6,8 @@ llaves.GOOGLE = {
 };
 
 // llaves.API = "http://localhost:3000";
-llaves.API = 'https://prueba-naztec.herokuapp.com'
+llaves.API = "http://localhost:4000";
+// llaves.API = 'https://prueba-naztec.herokuapp.com'
 
 llaves.DATABASE_NAME = "estudioo_famir";
 llaves.DATABASE_HOST = "estudioochoamaldonado.com";
