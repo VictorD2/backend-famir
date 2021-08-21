@@ -83,6 +83,7 @@ passport.use( new GoogleStrategy( {
         id_pais_nacimiento: "AF",
         id_pais_residencia: "AF",
         password: "",
+        profesion:"",
         url_foto_usuario: profile.photos[0].value,
       };
       const data = await pool.query("INSERT INTO usuario set ?", [newUser]); //Guardando en la bd
