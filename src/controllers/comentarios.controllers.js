@@ -57,9 +57,10 @@ ctrlComentarios.createComentario = async (req, res) => {
     if (!req.user) return res.json({ error: "Necesitas una cuenta para comentar" }); //Poner ! en producción
 
     const newComentario = req.body;
-    newComentario.fecha = new Date();
-    newComentario.id_usuario = req.user.id_usuario; //Poner req.user.id_usuario en producción
+    newComentario.fecha = new Date(newComentario.fecha);
+    newComentario.id_usuario = 45; //Poner req.user.id_usuario en producción
     delete newComentario.id_rango;
+    console.log(newComentario);
     if (newComentario.id_tema) delete newComentario.id_curso;
 
     if (newComentario.id_curso) delete newComentario.id_tema;
