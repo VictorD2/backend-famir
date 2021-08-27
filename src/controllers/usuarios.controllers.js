@@ -26,7 +26,12 @@ ctrlUsuarios.updateUserDatos = async (req, res) => {
     const { id_usuario, nombre, apellido, correo, telefono, rut, habilitado_u, profesion, id_rango, id_pais_nacimiento, id_pais_residencia } = req.body;
     const newUsuario = { id_usuario, nombre, apellido, correo, telefono, rut, habilitado_u, profesion, id_rango, id_pais_nacimiento, id_pais_residencia };
     const rows = await pool.query("UPDATE usuario set ? WHERE id_usuario = ?", [newUsuario, req.params.id]);
-    if (rows.affectedRows === 1) return res.json({ success: "Perfil modificado correctamente", usuario: newUsuario }); //Se logró registrar
+    if (rows.affectedRows === 1) {
+      const usuario = await pool.query("SELECT url_foto_usuario FROM usuario WHERE id_usuario = ?", [req.params.id]);
+      newUsuario.authenticate = true;
+      newUsuario.url_foto_usuario = usuario[0].url_foto_usuario;
+      return res.json({ success: "Perfil modificado correctamente", usuario: newUsuario }); //Se logró registrar
+    }
     return res.json({ error: "Ocurrió un error" });
   } catch (error) {
     console.log(error);
