@@ -76,7 +76,7 @@ ctrlContacto.createContacto = async (req, res) => {
     //       <li>Nombre: ${newContacto.nombre}</li>
     //       <li>Correo: ${newContacto.correo}</li>
     //   </ul>
-    //   <p>${newContacto.mensaje}</p>`;
+    // <p>${newContacto.mensaje}</p>`;
 
     // let info = await mail.sendMail({
     //   from: `Famir Web <${llaves.USER_EMAIL}>`, // sender address,
