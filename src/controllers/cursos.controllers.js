@@ -153,6 +153,7 @@ ctrlCursos.updateCurso = async (req, res) => {
 
       newCurso.url_foto_curso = `/uploads/fotosCursos/${req.file.filename}`;
     }
+    console.log(newCurso);
     const rows = await pool.query("UPDATE curso set ? WHERE id_curso = ?", [newCurso, req.params.id]);
     if (rows.affectedRows === 1) return res.json({ success: "Curso actualizado" }); //Se logró actualizar
     return res.json({ error: "Ocurrió un error" });
