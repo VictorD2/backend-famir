@@ -1,7 +1,5 @@
 const pool = require("../database");
 const ctrlTema = {};
-const path = require("path");
-const fs = require("fs-extra");
 
 //.get('/:id')
 ctrlTema.getTemaByModuloId = async (req, res) => {
@@ -29,7 +27,6 @@ ctrlTema.getTemaById = async (req, res) => {
 //.post('/')
 ctrlTema.createTema = async (req, res) => {
   try {
-    if (req.user.id_rango != "1") return res.json({ error: "No tienes permiso para esta acción" });
     const { titulo, descripcion, id_modulo, url_video } = req.body;
 
     const newTema = { titulo, descripcion, url_video, id_modulo };
@@ -48,7 +45,6 @@ ctrlTema.createTema = async (req, res) => {
 //.put('/:id')
 ctrlTema.actualizarTema = async (req, res) => {
   try {
-    if (req.user.id_rango != "1") return res.json({ error: "No tienes permiso para esta acción" });
     const { titulo, descripcion, id_modulo, id_tema } = req.body;
     const newTema = { titulo, descripcion, id_modulo, id_tema };
 
@@ -63,8 +59,6 @@ ctrlTema.actualizarTema = async (req, res) => {
 //.delete('/:id')
 ctrlTema.eliminarTema = async (req, res) => {
   try {
-    // const tema = await pool.query("SELECT * FROM tema WHERE id_tema = ?", [req.params.id]);
-    // await fs.unlink(path.join(__dirname, "../" + tema[0].url_video));
     const rows = await pool.query("DELETE FROM tema WHERE id_tema = ?", [req.params.id]);
     if (rows.affectedRows === 1) return res.json({ success: "Tema eliminado" }); //Se logró registrar
 
@@ -73,31 +67,6 @@ ctrlTema.eliminarTema = async (req, res) => {
     console.log(error);
     return res.json({ error: "Ocurrió un error" });
   }
-};
-
-//.get('/video-lock')
-ctrlTema.getVideo = async (req, res) => {
-  const range = req.headers.range;
-
-  if (req.query.key !== "1v4g8h6vcesm") return res.json({ error: "Wrong key" });
-
-  if (!range) return res.json({ error: "Requires Range header" });
-  const videoPath = path.join(__dirname, `..//${req.query.Tema}`);
-  const videoSize = fs.statSync(videoPath).size;
-  const CHUNK_SIZE = 0.6 * 10 ** 6; // 0.5MB
-  const start = Number(range.replace(/\D/g, ""));
-  const end = Math.min(start + CHUNK_SIZE, videoSize - 1);
-  const contentLength = end - start + 1;
-  const headers = {
-    "Content-Range": `bytes ${start}-${end}/${videoSize}`,
-    "Accept-Ranges": "bytes",
-    "Content-Length": contentLength,
-    "Content-Type": "video/mp4",
-  };
-
-  res.writeHead(206, headers);
-  const videoStream = fs.createReadStream(videoPath, { start, end });
-  videoStream.pipe(res);
 };
 
 module.exports = ctrlTema;

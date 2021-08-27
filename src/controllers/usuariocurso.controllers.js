@@ -20,7 +20,6 @@ ctrlUsuariocurso.getUsuariocursoByIdEstudiante = async (req, res) => {
 //.get("/curso/:idCurso")
 ctrlUsuariocurso.getUsuariocursoByIdCurso = async (req, res) => {
   try {
-    if (req.user.id_rango != "1") return res.json({ error: "No tienes permiso para esa acción" });
     const rows = await pool.query("SELECT id_usuario_curso,usuario.id_usuario,nombre,apellido,correo,telefono,url_foto_usuario FROM usuario_curso JOIN usuario ON usuario_curso.id_usuario = usuario.id_usuario WHERE id_curso = ?", [req.params.idCurso]);
     return res.json({ success: "Datos obtenidos", usuariosCursos: rows });
   } catch (error) {
@@ -44,8 +43,6 @@ ctrlUsuariocurso.getCountUsuarioCursoByCursoId = async (req, res) => {
 //.post("/")
 ctrlUsuariocurso.createUsuariocurso = async (req, res) => {
   try {
-    if (req.user.id_rango != "1") return res.json({ error: "No tienes permiso para esa acción" });
-
     const { id_comprobante, id_usuario, id_curso, url_foto_comprobante } = req.body;
     const newUsuariocurso = {
       id_usuario,

@@ -76,8 +76,6 @@ ctrlComentarios.createComentario = async (req, res) => {
 // .delete("/:id")
 ctrlComentarios.deleteComentario = async (req, res) => {
   try {
-    if (!req.user) return res.json({ error: "Necesitas una cuenta." });
-
     if (req.user.id_rango == "2") {
       const comentario = await pool.query("SELECT * FROM comentario WHERE id_comentario = ?", [id_comentario]);
       if (req.user.id_usuario != comentario[0].id_usuario) return res.json({ error: "No tienes permiso para esa acción." });
