@@ -32,6 +32,17 @@ ctrlProfesores.getProfesores = async (req, res) => {
   }
 };
 
+//.get("/public")
+ctrlProfesores.getProfesoresPublic = async (req, res) => {
+  try {
+    const profesores = await pool.query("SELECT nombre,apellido,profesion,url_foto_profesor FROM usuario WHERE id_usuario = 3");
+    return res.json({ success: "Datos obtenidos", profesores: profesores });
+  } catch (error) {
+    console.log(error);
+    return res.json({ error: "Ocurrió un error" });
+  }
+};
+
 //.get("/count")
 ctrlProfesores.getCount = async (req, res) => {
   try {
@@ -83,6 +94,7 @@ ctrlProfesores.createProfesor = async (req, res) => {
     newProfesor.habilitado_u = 1;
     newProfesor.url_foto_usuario = "/defaultProfile.PNG";
     newProfesor.password = newProfesor.rut;
+    newProfesor.url_foto_profesor = `/uploads/fotosProfesores/${req.file.filename}`;
     newProfesor.password = await helpers.encrypPassword(newProfesor.password);
     const rows = await pool.query("INSERT INTO usuario set ?", [newProfesor]);
 
@@ -100,11 +112,13 @@ ctrlProfesores.createProfesor = async (req, res) => {
 //.put("/:id")
 ctrlProfesores.updateProfesor = async (req, res) => {
   try {
-    const newProfesor = req.body;
-    delete newProfesor.nombre_pais_nacimiento;
-    delete newProfesor.nombre_pais_residencia;
-    delete newProfesor.url_foto_nacimiento;
-    delete newProfesor.url_foto_residencia;
+    const { nombre, apellido, telefono, rut, profesion, correo, id_pais_nacimiento, id_pais_residencia } = req.body;
+    const newProfesor = { nombre, apellido, telefono, rut, profesion, correo, id_pais_nacimiento, id_pais_residencia };
+    if (req.file) {
+      newProfesor.url_foto_profesor = `/uploads/fotosProfesores/${req.file.filename}`;
+      const profesor = await pool.query("SELECT * FROM usuario WHERE id_usuario = ?", [req.params.id]);
+      await fs.unlink(path.join(__dirname, "../build" + profesor[0].url_foto_profesor));
+    }
     const rows = await pool.query("UPDATE usuario set ? WHERE id_usuario = ?", [newProfesor, req.params.id]);
     if (rows.affectedRows === 1) return res.json({ success: "Profesor actualizado" }); //Se logró actualizar
 
