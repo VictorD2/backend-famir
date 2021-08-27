@@ -134,7 +134,15 @@ ctrlCursos.createCurso = async (req, res) => {
 //.put('/:id')
 ctrlCursos.updateCurso = async (req, res) => {
   try {
-    const newCurso = req.body;
+    const { nombre_curso, descripcion, precio, duracion, horario, enlace, tipo, modalidad, capacidad, id_usuario, uri_carpeta_vimeo } = req.body;
+    const newCurso = { nombre_curso, descripcion, precio, capacidad, duracion, horario, enlace, tipo, modalidad, id_usuario, uri_carpeta_vimeo, habilitado: 1 };
+
+    if (modalidad === "Asincrónico") {
+      delete newCurso.duracion;
+      delete newCurso.horario;
+      delete newCurso.enlace;
+      delete newCurso.capacidad;
+    }
     delete newCurso.modulos;
     delete newCurso.fotoCurso;
 
@@ -159,7 +167,6 @@ ctrlCursos.updateCurso = async (req, res) => {
 // .delete('/:id')
 ctrlCursos.deleteCurso = async (req, res) => {
   try {
-
     const rows = await pool.query("SELECT * FROM curso WHERE id_curso = ?", [req.params.id]);
     let estado = "";
     rows[0].habilitado == 0 ? (rows[0].habilitado = 1) : (rows[0].habilitado = 0);
