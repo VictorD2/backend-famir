@@ -134,6 +134,7 @@ ctrlCursos.createCurso = async (req, res) => {
 //.put('/:id')
 ctrlCursos.updateCurso = async (req, res) => {
   try {
+    console.log(req.file, "Archivo");
     const { nombre_curso, descripcion, precio, duracion, horario, enlace, tipo, modalidad, capacidad, id_usuario, uri_carpeta_vimeo } = req.body;
     const newCurso = { nombre_curso, descripcion, precio, capacidad, duracion, horario, enlace, tipo, modalidad, id_usuario, uri_carpeta_vimeo, habilitado: 1 };
 
