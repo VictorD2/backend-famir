@@ -1,7 +1,7 @@
 const pool = require("../database");
 const ctrlProfesores = {};
 const helpers = require("../lib/helpers");
-
+const fs = require("fs-extra");
 //.get("/")
 ctrlProfesores.getProfesores = async (req, res) => {
   try {
