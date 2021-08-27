@@ -53,8 +53,7 @@ router.get("/failedLogin", async (req, res) => {
 router.get("/auth/google", passport.authenticate("google", { scope: ["email", "profile"] }));
 // router.get("/auth/google/callback", passport.authenticate("google", { successRedirect: "/", failureRedirect: "/Iniciar" }));
 router.get("/auth/google/callback", passport.authenticate("google", { failureRedirect: "/Iniciar" }), function (req, res) {
-  console.log(req);
-  // Successful authentication, redirect home.
+  if (req.user.habilitado_u === 0) return res.send("Estás inhabilitado");
   res.redirect("/");
 });
 

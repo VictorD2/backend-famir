@@ -83,8 +83,6 @@ passport.use(
         let Joins = `JOIN pais AS pais_r ON pais_r.id_pais = usuario.id_pais_residencia JOIN pais AS pais_n ON pais_n.id_pais = usuario.id_pais_nacimiento`;
         const rows = await pool.query(`SELECT ${datosSQL} FROM usuario ${Joins} WHERE correo = ?`, [email]);
         if (rows.length > 0) {
-          if (rows[0].habilitado_u === 0) return done("Usuario inhabilitado", false, { message: "Usuario inhabilitado" }); //El usuario está inhabilitado
-
           rows[0].authenticate = true;
           return done(null, rows[0]); //Ya está guardado el correo en la bd
         }
