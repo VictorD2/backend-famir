@@ -27,9 +27,13 @@ ctrlUsuarios.updateUserDatos = async (req, res) => {
     const newUsuario = { id_usuario, nombre, apellido, correo, telefono, rut, habilitado_u, profesion, id_rango, id_pais_nacimiento, id_pais_residencia };
     const rows = await pool.query("UPDATE usuario set ? WHERE id_usuario = ?", [newUsuario, req.params.id]);
     if (rows.affectedRows === 1) {
-      const usuario = await pool.query("SELECT url_foto_usuario FROM usuario WHERE id_usuario = ?", [req.params.id]);
+      let datosSQL = `id_usuario,nombre,apellido,correo,telefono,rut,habilitado_u,url_foto_usuario,profesion , id_rango,pais_r.url_foto_pais AS url_foto_residencia,pais_n.url_foto_pais AS url_foto_nacimiento,pais_n.id_pais AS id_pais_nacimiento, pais_r.id_pais AS id_pais_residencia`;
+      let Joins = `JOIN pais AS pais_r ON pais_r.id_pais = usuario.id_pais_residencia JOIN pais AS pais_n ON pais_n.id_pais = usuario.id_pais_nacimiento`;
+      const usuario = await pool.query(`SELECT ${datosSQL} FROM usuario ${Joins} WHERE id_usuario = ?`, [req.params.id]);
       newUsuario.authenticate = true;
       newUsuario.url_foto_usuario = usuario[0].url_foto_usuario;
+      newUsuario.url_foto_residencia = usuario[0].url_foto_residencia;
+      newUsuario.url_foto_nacimiento = usuario[0].url_foto_nacimiento;
       return res.json({ success: "Perfil modificado correctamente", usuario: newUsuario }); //Se logró registrar
     }
     return res.json({ error: "Ocurrió un error" });
