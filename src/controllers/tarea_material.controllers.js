@@ -6,6 +6,8 @@ const path = require("path");
 //.get("/:id")
 ctrlTareaMaterial.getTareasByTareaId = async (req, res) => {
   try {
+    if (req.user.id_rango != "1") return res.json({ error: "No tienes permiso para esta acción" });
+
     const rows = await pool.query("SELECT nombre_material_tarea,nombre,apellido,fecha_entrega,id_material_tarea,url_material,id_tarea FROM material_tarea JOIN usuario ON usuario.id_usuario = material_tarea.id_usuario WHERE id_tarea = ?", [req.params.id]);
     res.json({ success: "Datos obtenidos", material: rows });
   } catch (error) {
@@ -17,6 +19,8 @@ ctrlTareaMaterial.getTareasByTareaId = async (req, res) => {
 //.post("/")
 ctrlTareaMaterial.createTareaMaterial = async (req, res) => {
   try {
+    if (req.user.id_rango != "1") return res.json({ error: "No tienes permiso para esta acción" });
+
     const url_material_tarea = `/uploads/tareas/${req.files.material_tarea[0].filename}`;
     const { id_tarea } = req.body;
     const newTarea = {
@@ -38,6 +42,8 @@ ctrlTareaMaterial.createTareaMaterial = async (req, res) => {
 //.delete("/:id")
 ctrlTareaMaterial.eliminarTareaMaterial = async (req, res) => {
   try {
+    if (req.user.id_rango != "1") return res.json({ error: "No tienes permiso para esta acción" });
+
     const material = await pool.query("SELECT * FROM material_tarea WHERE id_material_tarea = ?", [req.params.id]);
     await fs.unlink(path.join(__dirname, "../build" + material[0].url_material));
     const rows = await pool.query("DELETE FROM material_tarea WHERE id_material_tarea = ?", [req.params.id]);

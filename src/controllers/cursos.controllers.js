@@ -109,8 +109,10 @@ ctrlCursos.verificarSub = async (req, res) => {
 //.post('/')
 ctrlCursos.createCurso = async (req, res) => {
   try {
-    const { nombre_curso, descripcion, precio, duracion, horario, enlace, tipo, modalidad, capacidad, id_usuario,uri_carpeta_vimeo } = req.body;
-    const newCurso = { nombre_curso, descripcion, precio, capacidad, duracion, horario, enlace, tipo, modalidad, id_usuario,uri_carpeta_vimeo, habilitado: 1 };
+    if (req.user.id_rango != "1") return res.json({ error: "No tienes permiso para esta acción" });
+
+    const { nombre_curso, descripcion, precio, duracion, horario, enlace, tipo, modalidad, capacidad, id_usuario, uri_carpeta_vimeo } = req.body;
+    const newCurso = { nombre_curso, descripcion, precio, capacidad, duracion, horario, enlace, tipo, modalidad, id_usuario, uri_carpeta_vimeo, habilitado: 1 };
 
     if (modalidad === "Asincrónico") {
       delete newCurso.duracion;
@@ -134,6 +136,8 @@ ctrlCursos.createCurso = async (req, res) => {
 //.put('/:id')
 ctrlCursos.updateCurso = async (req, res) => {
   try {
+    if (req.user.id_rango != "1") return res.json({ error: "No tienes permiso para esta acción" });
+
     const newCurso = req.body;
     delete newCurso.modulos;
     delete newCurso.fotoCurso;
@@ -159,6 +163,8 @@ ctrlCursos.updateCurso = async (req, res) => {
 // .delete('/:id')
 ctrlCursos.deleteCurso = async (req, res) => {
   try {
+    if (req.user.id_rango != "1") return res.json({ error: "No tienes permiso para esta acción" });
+
     const rows = await pool.query("SELECT * FROM curso WHERE id_curso = ?", [req.params.id]);
     let estado = "";
     rows[0].habilitado == 0 ? (rows[0].habilitado = 1) : (rows[0].habilitado = 0);

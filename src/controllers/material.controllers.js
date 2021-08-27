@@ -18,6 +18,8 @@ ctrlEstudiantes.getMaterialByTemaId = async (req, res) => {
 //.post('/')
 ctrlEstudiantes.createMaterial = async (req, res) => {
   try {
+    if (req.user.id_rango != "1") return res.json({ error: "No tienes permiso para esta acción" });
+
     const { id_tema } = req.body;
     let values = `VALUES `;
 
@@ -41,6 +43,8 @@ ctrlEstudiantes.createMaterial = async (req, res) => {
 //.delete('/:id')
 ctrlEstudiantes.deleteMaterial = async (req, res) => {
   try {
+    if (req.user.id_rango != "1") return res.json({ error: "No tienes permiso para esta acción" });
+
     const material = await pool.query("SELECT * FROM material_clase WHERE id_material_clase = ?", [req.params.id]);
     await fs.unlink(path.join(__dirname, "../build" + material[0].url_material));
     const rows = await pool.query("DELETE FROM material_clase WHERE id_material_clase = ?", [req.params.id]);

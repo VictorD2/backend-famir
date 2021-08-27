@@ -16,6 +16,8 @@ ctrlComprobantes.getCount = async (req, res) => {
 //.get('/:estado/:page')
 ctrlComprobantes.getComprobantes = async (req, res) => {
   try {
+    if (req.user.id_rango != "1") return res.json({ error: "No tienes permiso para esta acción" });
+
     const cantidadDatos = 12;
     const pagina = (req.params.page - 1) * cantidadDatos;
     const rows = await pool.query("SELECT id_comprobante,estado,usuario.id_usuario,nombre,apellido,nombre_curso,url_foto_comprobante FROM comprobante JOIN usuario ON comprobante.id_usuario = usuario.id_usuario JOIN curso ON curso.id_curso=comprobante.id_curso WHERE estado = ? ORDER BY fecha_enviado DESC", [req.params.estado]);
@@ -29,6 +31,8 @@ ctrlComprobantes.getComprobantes = async (req, res) => {
 //.get('/:id')
 ctrlComprobantes.getComprobanteById = async (req, res) => {
   try {
+    if (req.user.id_rango != "1") return res.json({ error: "No tienes permiso para esta acción" });
+
     const rows = await pool.query("SELECT * FROM comprobante WHERE id_comprobante = ?", [req.params.id]);
     if (rows[0]) return res.json({ success: "Dato obtenido", comprobante: rows[0] });
     return res.json({ error: "Ocurrió un error" });
@@ -81,6 +85,8 @@ ctrlComprobantes.createComprobante = async (req, res) => {
 // .put('/:id')
 ctrlComprobantes.actualizarComprobante = async (req, res) => {
   try {
+    if (req.user.id_rango != "1") return res.json({ error: "No tienes permiso para esta acción" });
+
     const newComprobante = req.body;
     const comprobante = await pool.query("UPDATE comprobante set ? WHERE id_comprobante = ?", [newComprobante, req.params.id]);
     const usuarioCurso = await pool.query("DELETE FROM usuario_curso WHERE id_curso = ? AND id_usuario = ?", [newComprobante.id_curso, newComprobante.id_usuario]);

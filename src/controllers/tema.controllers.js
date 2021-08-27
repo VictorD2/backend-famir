@@ -29,6 +29,7 @@ ctrlTema.getTemaById = async (req, res) => {
 //.post('/')
 ctrlTema.createTema = async (req, res) => {
   try {
+    if (req.user.id_rango != "1") return res.json({ error: "No tienes permiso para esta acción" });
     const { titulo, descripcion, id_modulo, url_video } = req.body;
 
     const newTema = { titulo, descripcion, url_video, id_modulo };
@@ -47,6 +48,7 @@ ctrlTema.createTema = async (req, res) => {
 //.put('/:id')
 ctrlTema.actualizarTema = async (req, res) => {
   try {
+    if (req.user.id_rango != "1") return res.json({ error: "No tienes permiso para esta acción" });
     const { titulo, descripcion, id_modulo, id_tema } = req.body;
     const newTema = { titulo, descripcion, id_modulo, id_tema };
 

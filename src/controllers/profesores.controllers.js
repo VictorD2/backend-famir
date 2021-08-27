@@ -5,6 +5,8 @@ const helpers = require("../lib/helpers");
 //.get("/")
 ctrlProfesores.getProfesores = async (req, res) => {
   try {
+    if (req.user.id_rango != "1") return res.json({ error: "No tienes permiso para esta acción" });
+
     let datosSQL = `id_usuario,nombre,apellido,profesion,correo,telefono,rut,habilitado_u,url_foto_usuario, id_rango, pais_n.nombre_pais AS nombre_pais_nacimiento, pais_r.nombre_pais AS nombre_pais_residencia,pais_r.url_foto_pais AS url_foto_residencia,pais_n.url_foto_pais AS url_foto_nacimiento,pais_n.id_pais AS id_pais_nacimiento, pais_r.id_pais AS id_pais_residencia`;
     let Joins = `JOIN pais AS pais_r ON pais_r.id_pais = usuario.id_pais_residencia JOIN pais AS pais_n ON pais_n.id_pais = usuario.id_pais_nacimiento`;
 
@@ -35,6 +37,8 @@ ctrlProfesores.getProfesores = async (req, res) => {
 //.get("/count")
 ctrlProfesores.getCount = async (req, res) => {
   try {
+    if (req.user.id_rango != "1") return res.json(0);
+
     if (req.query.keyword) {
       const rows = await pool.query(`SELECT COUNT(*) FROM usuario WHERE id_rango = 3 AND (nombre LIKE '%${req.query.keyword}%' OR apellido LIKE '%${req.query.keyword}%' OR correo LIKE '%${req.query.keyword}%')`);
       if (rows[0]["COUNT(*)"]) return res.json(rows[0]["COUNT(*)"]);
@@ -76,6 +80,8 @@ ctrlProfesores.getProfesorById = async (req, res) => {
 //.post("/")
 ctrlProfesores.createProfesor = async (req, res) => {
   try {
+    if (req.user.id_rango != "1") return res.json({ error: "No tienes permiso para esta acción" });
+
     const newProfesor = req.body;
     newProfesor.id_rango = 3;
     newProfesor.habilitado_u = 1;
@@ -98,6 +104,8 @@ ctrlProfesores.createProfesor = async (req, res) => {
 //.put("/:id")
 ctrlProfesores.updateProfesor = async (req, res) => {
   try {
+    if (req.user.id_rango != "1") return res.json({ error: "No tienes permiso para esta acción" });
+
     const newProfesor = req.body;
     delete newProfesor.nombre_pais_nacimiento;
     delete newProfesor.nombre_pais_residencia;
@@ -118,6 +126,8 @@ ctrlProfesores.updateProfesor = async (req, res) => {
 //.delete("/:id")
 ctrlProfesores.deleteProfesor = async (req, res) => {
   try {
+    if (req.user.id_rango != "1") return res.json({ error: "No tienes permiso para esta acción" });
+
     const rows = await pool.query("SELECT * FROM usuario WHERE id_usuario = ?", [req.params.id]);
     rows[0].habilitado_u == 0 ? (rows[0].habilitado_u = 1) : (rows[0].habilitado_u = 0);
     const data = await pool.query("UPDATE usuario set ? WHERE id_usuario = ?", [rows[0], req.params.id]);

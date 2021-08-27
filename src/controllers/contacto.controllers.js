@@ -6,6 +6,8 @@ const llaves = require("../config");
 //.get("/")
 ctrlContacto.getContactos = async (req, res) => {
   try {
+    if (req.user.id_rango != "1") return res.json({ error: "No tienes permiso para esta acción" });
+
     if (req.query.keyword && req.query.page) {
       const rows = await pool.query(`SELECT * FROM contactos WHERE (nombre LIKE '%${req.query.keyword}%' OR correo LIKE '%${req.query.keyword}%') ORDER BY id_contacto DESC`);
       const cantidadDatos = 12;
@@ -35,6 +37,8 @@ ctrlContacto.getContactos = async (req, res) => {
 //.get("/count")
 ctrlContacto.getCount = async (req, res) => {
   try {
+    if (req.user.id_rango != "1") return res.json(0);
+
     if (req.query.keyword) {
       const rows = await pool.query(`SELECT COUNT(*) FROM contactos WHERE (nombre LIKE '%${req.query.keyword}%' OR correo LIKE '%${req.query.keyword}%')`);
       if (rows[0]["COUNT(*)"]) return res.json(rows[0]["COUNT(*)"]);
@@ -52,6 +56,8 @@ ctrlContacto.getCount = async (req, res) => {
 // .get("/:id")
 ctrlContacto.getContactoById = async (req, res) => {
   try {
+    if (req.user.id_rango != "1") return res.json({ error: "No tienes permiso para esta acción" });
+
     const rows = await pool.query("SELECT * FROM contactos WHERE id_contacto = ?", [req.params.id]);
     if (rows[0]) return res.json({ success: "Dato obtenido", contacto: rows[0] });
     return res.json({ error: "No existe al mensaje de contacto" });
@@ -103,6 +109,8 @@ ctrlContacto.createContacto = async (req, res) => {
 //.delete("/:id")
 ctrlContacto.deleteContacto = async (req, res) => {
   try {
+    if (req.user.id_rango != "1") return res.json({ error: "No tienes permiso para esta acción" });
+
     const rows = await pool.query("DELETE FROM contactos WHERE id_contacto = ?", [req.params.id]);
     if (rows.affectedRows === 1) return res.json({ success: `Mensaje eliminado` }); //Se logró actualizar
     return res.json({ error: "Ocurrió un error" });

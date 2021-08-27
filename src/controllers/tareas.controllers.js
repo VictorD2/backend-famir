@@ -27,6 +27,8 @@ ctrlTarea.getTareasByModuloId = async (req, res) => {
 //.post("/")
 ctrlTarea.createTarea = async (req, res) => {
   try {
+    if (req.user.id_rango != "1") return res.json({ error: "No tienes permiso para esta acción" });
+
     const newTarea = req.body;
     const rows = await pool.query("INSERT INTO tarea set ?", [newTarea]);
 
@@ -42,6 +44,8 @@ ctrlTarea.createTarea = async (req, res) => {
 //.delete("/:id")
 ctrlTarea.eliminarTarea = async (req, res) => {
   try {
+    if (req.user.id_rango != "1") return res.json({ error: "No tienes permiso para esta acción" });
+
     const rows = await pool.query("DELETE FROM tarea WHERE id_tarea = ?", [req.params.id]);
     if (rows.affectedRows === 1) return res.json({ success: "Tarea eliminada" }); //Se logró registrar
     return res.json({ error: "Ocurrió un error" });
@@ -54,6 +58,8 @@ ctrlTarea.eliminarTarea = async (req, res) => {
 //.put("/")
 ctrlTarea.actualizarTarea = async (req, res) => {
   try {
+    if (req.user.id_rango != "1") return res.json({ error: "No tienes permiso para esta acción" });
+
     newTarea = req.body;
     const rows = await pool.query("UPDATE tarea set ? WHERE id_tarea = ?", [newTarea, newTarea.id_tarea]);
 
