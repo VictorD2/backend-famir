@@ -134,7 +134,6 @@ ctrlCursos.createCurso = async (req, res) => {
 //.put('/:id')
 ctrlCursos.updateCurso = async (req, res) => {
   try {
-    console.log(req.file, "Archivo");
     const { nombre_curso, descripcion, precio, duracion, horario, enlace, tipo, modalidad, capacidad, id_usuario, uri_carpeta_vimeo } = req.body;
     const newCurso = { nombre_curso, descripcion, precio, capacidad, duracion, horario, enlace, tipo, modalidad, id_usuario, uri_carpeta_vimeo, habilitado: 1 };
 
@@ -149,12 +148,9 @@ ctrlCursos.updateCurso = async (req, res) => {
 
     if (req.file) {
       const curso = await pool.query("SELECT * FROM curso WHERE id_curso = ?", [req.params.id]);
-
       await fs.unlink(path.join(__dirname, "../build" + curso[0].url_foto_curso));
-
       newCurso.url_foto_curso = `/uploads/fotosCursos/${req.file.filename}`;
     }
-    console.log(newCurso);
     const rows = await pool.query("UPDATE curso set ? WHERE id_curso = ?", [newCurso, req.params.id]);
     if (rows.affectedRows === 1) return res.json({ success: "Curso actualizado" }); //Se logró actualizar
     return res.json({ error: "Ocurrió un error" });
