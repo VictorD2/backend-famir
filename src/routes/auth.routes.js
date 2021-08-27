@@ -52,14 +52,11 @@ router.get("/failedLogin", async (req, res) => {
 //Iniciar con Google
 router.get("/auth/google", passport.authenticate("google", { scope: ["email", "profile"] }));
 // router.get("/auth/google/callback", passport.authenticate("google", { successRedirect: "/", failureRedirect: "/Iniciar" }));
-router.get(
-  "/auth/google/callback",
-  passport.authenticate("google", { failureRedirect: "/Iniciar" }, function (req, res) {
-    console.log(req);
-    // Successful authentication, redirect home.
-    res.redirect("/");
-  })
-);
+router.get("/auth/google/callback", passport.authenticate("google", { failureRedirect: "/Iniciar" }), function (req, res) {
+  console.log(req);
+  // Successful authentication, redirect home.
+  res.redirect("/");
+});
 
 //Desconectarse
 router.get("/logout", (req, res) => {
