@@ -56,9 +56,9 @@ router.get("/auth/google/callback", passport.authenticate("google", { failureRed
   try {
     if (req.user.habilitado_u === 0) {
       req.logOut();
-      return res.send("Estás inhabilitado");
+      return res.redirect("/Inhabilitado");
     }
-    res.redirect("/Inhabilitado");
+    res.redirect("/");
   } catch (error) {
     console.log(error);
     res.json({ error: error });
