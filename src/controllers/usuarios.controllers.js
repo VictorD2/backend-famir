@@ -8,9 +8,10 @@ const path = require("path");
 ctrlUsuarios.whoiam = async (req, res) => {
   try {
     if (!req.user) return res.json({ error: "No autentificado" }); //No autentificado
-    let datosSQL = `id_usuario,nombre,apellido,correo,telefono,rut,habilitado_u,url_foto_usuario,profesion , id_rango,pais_r.url_foto_pais AS url_foto_residencia,pais_n.url_foto_pais AS url_foto_nacimiento,pais_n.id_pais AS id_pais_nacimiento, pais_r.id_pais AS id_pais_residencia`;
+    let datosSQL = `id_usuario,nombre,apellido,correo,telefono,rut,habilitado_u,url_foto_usuario,profesion ,id_rango,pais_r.url_foto_pais AS url_foto_residencia,pais_n.url_foto_pais AS url_foto_nacimiento,pais_n.id_pais AS id_pais_nacimiento, pais_r.id_pais AS id_pais_residencia`;
     let Joins = `JOIN pais AS pais_r ON pais_r.id_pais = usuario.id_pais_residencia JOIN pais AS pais_n ON pais_n.id_pais = usuario.id_pais_nacimiento`;
     const rows = await pool.query(`SELECT ${datosSQL} FROM usuario ${Joins} WHERE correo = ?`, [req.user.correo]);
+    rows[0].authenticate = true;
     return res.json({ user: rows[0] });
   } catch (error) {
     console.log(error);
