@@ -70,26 +70,26 @@ ctrlContacto.createContacto = async (req, res) => {
       correo: email,
       mensaje: message,
     };
-    // let contentHTML = `
-    //   <h1>User Information</h1>
-    //   <ul>
-    //       <li>Nombre: ${newContacto.nombre}</li>
-    //       <li>Correo: ${newContacto.correo}</li>
-    //   </ul>
-    // <p>${newContacto.mensaje}</p>`;
+    let contentHTML = `
+      <h1>User Information</h1>
+      <ul>
+          <li>Nombre: ${newContacto.nombre}</li>
+          <li>Correo: ${newContacto.correo}</li>
+      </ul>
+    <p>${newContacto.mensaje}</p>`;
 
-    // let info = await mail.sendMail({
-    //   from: `Famir Web <${llaves.USER_EMAIL}>`, // sender address,
-    //   to: "victorhv2729@gmail.com",
-    //   subject: "Mensaje de Contacto",
-    //   html: contentHTML,
-    // });
-    // console.log("Message sent: %s", info.messageId);
-    // // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
+    let info = await mail.sendMail({
+      from: `Famir Web <${llaves.USER_EMAIL}>`, // sender address,
+      to: "victorhv2729@gmail.com",
+      subject: "Mensaje de Contacto",
+      html: contentHTML,
+    });
+    console.log("Message sent: %s", info.messageId);
+    // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
 
-    // // Preview only available when sending through an Ethereal account
-    // console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
-    // // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
+    // Preview only available when sending through an Ethereal account
+    console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
+    // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
 
     const rows = await pool.query("INSERT INTO contactos SET ?", [newContacto]);
     if (rows.affectedRows === 1) return res.json({ success: "Mensaje Enviado" }); //Se logró registrar

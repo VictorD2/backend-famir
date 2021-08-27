@@ -25,7 +25,7 @@ llaves.PORT = "3306";
 
 
 //CORREO
-llaves.HOST_EMAIL = "a2plcpnl0649.prod.iad2.secureserver.net";
+llaves.HOST_EMAIL = "mail.estudioochoamaldonado.com";
 llaves.PORT_EMAIL = 465;
 llaves.SECURE_EMAIL = true;
 llaves.USER_EMAIL = "aaron.paredes@estudioochoamaldonado.com";
