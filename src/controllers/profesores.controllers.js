@@ -72,7 +72,7 @@ ctrlProfesores.getProfesorById = async (req, res) => {
   //   return res.json(rows[0]);
   // }
   try {
-    let datosSQL = `id_usuario,nombre,apellido,profesion,correo,telefono,rut,habilitado_u,url_foto_usuario, id_rango, pais_n.nombre_pais AS nombre_pais_nacimiento, pais_r.nombre_pais AS nombre_pais_residencia,pais_r.url_foto_pais AS url_foto_residencia,pais_n.url_foto_pais AS url_foto_nacimiento,pais_n.id_pais AS id_pais_nacimiento, pais_r.id_pais AS id_pais_residencia`;
+    let datosSQL = `id_usuario,nombre,url_foto_profesor,apellido,profesion,correo,telefono,rut,habilitado_u,url_foto_usuario, id_rango, pais_n.nombre_pais AS nombre_pais_nacimiento, pais_r.nombre_pais AS nombre_pais_residencia,pais_r.url_foto_pais AS url_foto_residencia,pais_n.url_foto_pais AS url_foto_nacimiento,pais_n.id_pais AS id_pais_nacimiento, pais_r.id_pais AS id_pais_residencia`;
     let Joins = `JOIN pais AS pais_r ON pais_r.id_pais = usuario.id_pais_residencia JOIN pais AS pais_n ON pais_n.id_pais = usuario.id_pais_nacimiento`;
 
     const rows = await pool.query(`SELECT ${datosSQL} FROM usuario ${Joins} WHERE id_usuario = ? ORDER BY id_usuario DESC`, [req.params.id]);
