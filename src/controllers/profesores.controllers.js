@@ -36,6 +36,7 @@ ctrlProfesores.getProfesores = async (req, res) => {
 ctrlProfesores.getProfesoresPublic = async (req, res) => {
   try {
     const profesores = await pool.query("SELECT nombre,apellido,profesion,url_foto_profesor FROM usuario WHERE id_usuario = 3");
+    console.log(profesores);
     return res.json({ success: "Datos obtenidos", profesores: profesores });
   } catch (error) {
     console.log(error);
