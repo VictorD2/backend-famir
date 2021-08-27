@@ -2,6 +2,7 @@ const pool = require("../database");
 const ctrlProfesores = {};
 const helpers = require("../lib/helpers");
 const fs = require("fs-extra");
+const path = require("path");
 //.get("/")
 ctrlProfesores.getProfesores = async (req, res) => {
   try {
