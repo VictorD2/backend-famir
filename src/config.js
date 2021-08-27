@@ -6,6 +6,8 @@ llaves.GOOGLE = {
 };
 
 // llaves.API = "http://localhost:3000";
+// llaves.API = "http://192.168.0.105:3000";
+// llaves.API = "http://192.168.0.105:4000";
 // llaves.API = "http://localhost:4000";
 llaves.API = 'https://prueba-naztec.herokuapp.com'
 
@@ -28,11 +30,5 @@ llaves.PORT_EMAIL = 465;
 llaves.SECURE_EMAIL = true;
 llaves.USER_EMAIL = "aaron.paredes@estudioochoamaldonado.com";
 llaves.PASS_EMAIL = "exitoso01";
-
-
-//VIMEO
-llaves.CLIENT_ID_VIMEO = "72c9aa8a9e250995e93ecaa6a674f4be900f94d5";
-llaves.CLIENT_SECRET_VIMEO = "CN9HBV8c4SysOm9ClGhvRWgYkPTph/dRjEjGfX7mdQHxcC37En73pNO1gOyxRA9WKI2EN+tihBVDl65bn0iT3rjk4JAuQWMjVNwQa75HkcpBliSDn/awvZgCWDGXNXo2";
-llaves.CLIENT_TOKEN_VIMEO = "59aeebdcfb687f072312e017596c484b";
 
 module.exports = llaves;

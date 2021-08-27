@@ -109,8 +109,8 @@ ctrlCursos.verificarSub = async (req, res) => {
 //.post('/')
 ctrlCursos.createCurso = async (req, res) => {
   try {
-    const { nombre_curso, descripcion, precio, duracion, horario, enlace, tipo, modalidad, capacidad, id_usuario } = req.body;
-    const newCurso = { nombre_curso, descripcion, precio, capacidad, duracion, horario, enlace, tipo, modalidad, id_usuario, habilitado: 1 };
+    const { nombre_curso, descripcion, precio, duracion, horario, enlace, tipo, modalidad, capacidad, id_usuario,uri_carpeta_vimeo } = req.body;
+    const newCurso = { nombre_curso, descripcion, precio, capacidad, duracion, horario, enlace, tipo, modalidad, id_usuario,uri_carpeta_vimeo, habilitado: 1 };
 
     if (modalidad === "Asincrónico") {
       delete newCurso.duracion;
