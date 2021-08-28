@@ -27,12 +27,10 @@ ctrlTema.getTemaById = async (req, res) => {
 //.post('/')
 ctrlTema.createTema = async (req, res) => {
   try {
-    console.log(req.body);
     const { titulo, descripcion, id_modulo, url_video } = req.body;
 
     const newTema = { titulo, descripcion, url_video, id_modulo };
 
-    console.log(newTema);
     const rows = await pool.query("INSERT INTO tema set ? ", [newTema]);
 
     if (rows.affectedRows === 1) return res.json({ success: "Tema creado" }); //Se logró registrar
@@ -50,7 +48,7 @@ ctrlTema.actualizarTema = async (req, res) => {
     const { titulo, descripcion } = req.body;
     const newTema = { titulo, descripcion };
 
-    await pool.query("UPDATE tema set ? WHERE id_tema = ?", [newTema, params.id]);
+    await pool.query("UPDATE tema set ? WHERE id_tema = ?", [newTema, req.params.id]);
     return res.json({ success: "Tema modificado correctamente" }); //Se logró registrar
   } catch (error) {
     console.log(error);
