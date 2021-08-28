@@ -47,10 +47,10 @@ ctrlTema.createTema = async (req, res) => {
 //.put('/:id')
 ctrlTema.actualizarTema = async (req, res) => {
   try {
-    const { titulo, descripcion, id_modulo, id_tema } = req.body;
-    const newTema = { titulo, descripcion, id_modulo, id_tema };
+    const { titulo, descripcion } = req.body;
+    const newTema = { titulo, descripcion };
 
-    await pool.query("UPDATE tema set ? WHERE id_tema = ?", [newTema, newTema.id_tema]);
+    await pool.query("UPDATE tema set ? WHERE id_tema = ?", [newTema, params.id]);
     return res.json({ success: "Tema modificado correctamente" }); //Se logró registrar
   } catch (error) {
     console.log(error);
