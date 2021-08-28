@@ -27,6 +27,7 @@ ctrlTema.getTemaById = async (req, res) => {
 //.post('/')
 ctrlTema.createTema = async (req, res) => {
   try {
+    console.log(req.body);
     const { titulo, descripcion, id_modulo, url_video } = req.body;
 
     const newTema = { titulo, descripcion, url_video, id_modulo };
