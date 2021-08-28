@@ -31,6 +31,7 @@ ctrlTema.createTema = async (req, res) => {
 
     const newTema = { titulo, descripcion, url_video, id_modulo };
 
+    console.log(newTema);
     const rows = await pool.query("INSERT INTO tema set ? ", [newTema]);
 
     if (rows.affectedRows === 1) return res.json({ success: "Tema creado" }); //Se logró registrar
