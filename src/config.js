@@ -5,11 +5,11 @@ llaves.GOOGLE = {
   clientSecret: "zZPU5xVhos4q4_mECto3x1wT",
 };
 
-llaves.API = "http://localhost:3000";
+// llaves.API = "http://localhost:3000";
 // llaves.API = "http://192.168.0.105:3000";
 // llaves.API = "http://192.168.0.105:4000";
 // llaves.API = "http://localhost:4000";
-// llaves.API = 'https://prueba-naztec.herokuapp.com'
+llaves.API = 'https://prueba-naztec.herokuapp.com'
 
 llaves.DATABASE_NAME = "estudioo_famir";
 llaves.DATABASE_HOST = "estudioochoamaldonado.com";
