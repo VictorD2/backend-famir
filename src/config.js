@@ -12,10 +12,10 @@ llaves.GOOGLE = {
 // llaves.API = 'https://prueba-naztec.herokuapp.com'
 llaves.API = 'https://famircentro.com'
 
-llaves.DATABASE_NAME = "estudioo_famir";
-llaves.DATABASE_HOST = "estudioochoamaldonado.com";
-llaves.DATABASE_USER = "estudioochoa";
-llaves.PASSWORD = "35TUD10OC4O@1121";
+llaves.DATABASE_NAME = "famir_centro";
+llaves.DATABASE_HOST = "famircentro.com";
+llaves.DATABASE_USER = "famir";
+llaves.PASSWORD = "CharlasyCapacitaciones";
 llaves.PORT = "3306";
 
 // llaves.DATABASE_NAME = "bd_famir";
@@ -26,10 +26,10 @@ llaves.PORT = "3306";
 
 
 //CORREO
-llaves.HOST_EMAIL = "mail.estudioochoamaldonado.com";
+llaves.HOST_EMAIL = "mail.famircentro.com";
 llaves.PORT_EMAIL = 465;
 llaves.SECURE_EMAIL = true;
-llaves.USER_EMAIL = "aaron.paredes@estudioochoamaldonado.com";
+llaves.USER_EMAIL = "contacto@famircentro.com";
 llaves.PASS_EMAIL = "exitoso01";
 
 module.exports = llaves;
