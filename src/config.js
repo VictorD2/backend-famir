@@ -10,7 +10,7 @@ llaves.GOOGLE = {
 // llaves.API = "http://192.168.0.105:4000";
 // llaves.API = "http://localhost:4000";
 // llaves.API = 'https://prueba-naztec.herokuapp.com'
-llaves.API = 'http://famircentro.com'
+llaves.API = 'https://famircentro.com'
 
 llaves.DATABASE_NAME = "famir_centro";
 llaves.DATABASE_HOST = "famircentro.com";
