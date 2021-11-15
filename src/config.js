@@ -18,11 +18,11 @@ llaves.DATABASE_USER = "famir";
 llaves.PASSWORD = "CharlasyCapacitaciones";
 llaves.PORT = "3306";
 
-// llaves.DATABASE_NAME = "bd_famir";
-// llaves.DATABASE_HOST = "localhost";
-// llaves.DATABASE_USER = "root";
-// llaves.PASSWORD = "";
-// llaves.PORT = "3306";
+llaves.DATABASE_NAME = "bd_famir";
+llaves.DATABASE_HOST = "localhost";
+llaves.DATABASE_USER = "root";
+llaves.PASSWORD = "";
+llaves.PORT = "3306";
 
 
 //CORREO

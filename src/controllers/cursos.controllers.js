@@ -18,10 +18,10 @@ ctrlCursos.getCursos = async (req, res) => {
     datosSQL = "nombre,apellido,descripcion,duracion,enlace,horario,id_curso,modalidad,precio,tipo,capacidad,url_foto_curso,nombre_curso,habilitado";
 
     if (req.query.keyword && req.query.page) {
-      const data = await pool.query(`SELECT ${datosSQL} FROM curso JOIN usuario ON usuario.id_usuario = curso.id_usuario WHERE (tipo = '${tipo}' AND modalidad = '${modalidad}') AND (nombre_curso LIKE '%${req.query.keyword}%' ${habilitado})`);
-      for (let i = 0; i < data.length; i++) delete data[i].password;
       const cantidadDatos = 12;
       const pagina = (parseInt(req.query.page) - 1) * cantidadDatos;
+      const data = await pool.query(`SELECT ${datosSQL} FROM curso JOIN usuario ON usuario.id_usuario = curso.id_usuario WHERE (tipo = '${tipo}' AND modalidad = '${modalidad}') AND (nombre_curso LIKE '%${req.query.keyword}%' ${habilitado}) LIMIT ${cantidadDatos * req.query.page}`);
+      for (let i = 0; i < data.length; i++) delete data[i].password;
       return res.json({ success: "Datos obtenidos", cursos: data.splice(pagina, cantidadDatos) });
     }
 
@@ -34,7 +34,7 @@ ctrlCursos.getCursos = async (req, res) => {
     if (req.query.page) {
       const cantidadDatos = 12;
       const pagina = (parseInt(req.query.page) - 1) * cantidadDatos;
-      const data = await pool.query(`SELECT ${datosSQL} FROM curso JOIN usuario ON usuario.id_usuario = curso.id_usuario WHERE tipo = '${tipo}' AND modalidad = '${modalidad}' ${habilitado}`);
+      const data = await pool.query(`SELECT ${datosSQL} FROM curso JOIN usuario ON usuario.id_usuario = curso.id_usuario WHERE tipo = '${tipo}' AND modalidad = '${modalidad}' ${habilitado} LIMIT ${cantidadDatos * req.query.page}`);
       for (let i = 0; i < data.length; i++) delete data[i].password;
       return res.json({ success: "Datos obtenidos", cursos: data.splice(pagina, cantidadDatos) });
     }
