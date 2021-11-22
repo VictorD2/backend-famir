@@ -1,24 +1,24 @@
 {
   "files": {
-    "main.css": "/static/css/main.72668bbd.chunk.css",
+    "main.css": "/static/css/main.1f1dbe22.chunk.css",
     "main.js": "/static/js/main.e9f60551.chunk.js",
     "main.js.map": "/static/js/main.e9f60551.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.499c483c.js",
-    "runtime-main.js.map": "/static/js/runtime-main.499c483c.js.map",
+    "runtime-main.js": "/static/js/runtime-main.56329ad2.js",
+    "runtime-main.js.map": "/static/js/runtime-main.56329ad2.js.map",
     "static/css/2.7ac9921d.chunk.css": "/static/css/2.7ac9921d.chunk.css",
     "static/js/2.d0434bc7.chunk.js": "/static/js/2.d0434bc7.chunk.js",
     "static/js/2.d0434bc7.chunk.js.map": "/static/js/2.d0434bc7.chunk.js.map",
     "static/css/3.c2501419.chunk.css": "/static/css/3.c2501419.chunk.css",
     "static/js/3.0d68d264.chunk.js": "/static/js/3.0d68d264.chunk.js",
     "static/js/3.0d68d264.chunk.js.map": "/static/js/3.0d68d264.chunk.js.map",
-    "static/js/4.cf7244dd.chunk.js": "/static/js/4.cf7244dd.chunk.js",
-    "static/js/4.cf7244dd.chunk.js.map": "/static/js/4.cf7244dd.chunk.js.map",
+    "static/js/4.8a476bc5.chunk.js": "/static/js/4.8a476bc5.chunk.js",
+    "static/js/4.8a476bc5.chunk.js.map": "/static/js/4.8a476bc5.chunk.js.map",
     "static/js/5.59b4e689.chunk.js": "/static/js/5.59b4e689.chunk.js",
     "static/js/5.59b4e689.chunk.js.map": "/static/js/5.59b4e689.chunk.js.map",
     "index.html": "/index.html",
     "static/css/2.7ac9921d.chunk.css.map": "/static/css/2.7ac9921d.chunk.css.map",
     "static/css/3.c2501419.chunk.css.map": "/static/css/3.c2501419.chunk.css.map",
-    "static/css/main.72668bbd.chunk.css.map": "/static/css/main.72668bbd.chunk.css.map",
+    "static/css/main.1f1dbe22.chunk.css.map": "/static/css/main.1f1dbe22.chunk.css.map",
     "static/js/2.d0434bc7.chunk.js.LICENSE.txt": "/static/js/2.d0434bc7.chunk.js.LICENSE.txt",
     "static/js/3.0d68d264.chunk.js.LICENSE.txt": "/static/js/3.0d68d264.chunk.js.LICENSE.txt",
     "static/media/1A.8fa85b10.jpg": "/static/media/1A.8fa85b10.jpg",
@@ -36,10 +36,10 @@
     "static/media/logoFamirNav.0d214c6d.png": "/static/media/logoFamirNav.0d214c6d.png"
   },
   "entrypoints": [
-    "static/js/runtime-main.499c483c.js",
+    "static/js/runtime-main.56329ad2.js",
     "static/css/3.c2501419.chunk.css",
     "static/js/3.0d68d264.chunk.js",
-    "static/css/main.72668bbd.chunk.css",
+    "static/css/main.1f1dbe22.chunk.css",
     "static/js/main.e9f60551.chunk.js"
   ]
 }
