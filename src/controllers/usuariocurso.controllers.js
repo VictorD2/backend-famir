@@ -64,8 +64,6 @@ ctrlUsuariocurso.createUsuariocurso = async (req, res) => {
       contentHTML = `
         <h1>Se ha aceptado su comprobante</h1>
         <p>Bienvenido al ${curso[0].tipo} ${curso[0].modalidad} ${curso[0].nombre_curso}</p>
-        <p>Horario: ${new Date(curso[0].horario).toLocaleString()}</p>
-        <a href="${curso[0].enlace}">${curso[0].enlace}</a>
         `;
     }
     let info = await mail.sendMail({
