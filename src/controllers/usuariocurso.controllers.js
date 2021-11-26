@@ -8,7 +8,7 @@ const llaves = require("../config");
 ctrlUsuariocurso.getUsuariocursoByIdEstudiante = async (req, res) => {
   try {
     if (req.user.id_usuario != req.params.idEstudiante) return res.json({ error: "No tienes permiso para esa acción" });
-
+   
     const rows = await pool.query("SELECT id_usuario_curso,nombre_curso,descripcion,url_foto_curso,habilitado,tipo,modalidad,enlace,favorito,curso.id_curso FROM usuario_curso JOIN curso ON usuario_curso.id_curso = curso.id_curso WHERE usuario_curso.id_usuario = ? AND habilitado = '1'", [req.params.idEstudiante]);
     return res.json({ success: "Datos obtenidos", cursos: rows });
   } catch (error) {
