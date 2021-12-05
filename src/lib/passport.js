@@ -61,6 +61,7 @@ passport.use(
         newUser.authenticate = true;
         return done(null, newUser);
       } catch (error) {
+        console.log(error);
         return done(null, false, { error: "El correo ya está en uso" });
       }
     }
