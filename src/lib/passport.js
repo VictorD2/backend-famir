@@ -53,13 +53,13 @@ passport.use(
         const { name, surname, email, password, rut, telefono, id_pais_nacimiento, id_pais_residencia, profesion } = req.body;
         const newUser = { nombre: name, apellido: surname, id_rango: 2, profesion, correo: email, telefono, rut, habilitado_u: 1, id_pais_nacimiento, id_pais_residencia, password, url_foto_usuario: "/defaultProfile.PNG" };
         newUser.password = await helpers.encrypPassword(newUser.password); //<- Encripta la contraseña
+        newUser.url_foto_profesor = "";
         const data = await pool.query("INSERT INTO usuario set ?", [newUser]);
         delete newUser.password;
         newUser.id_usuario = data.insertId;
         newUser.url_foto_residencia = req.body.url_foto_residencia;
         newUser.url_foto_nacimiento = req.body.url_foto_nacimiento;
         newUser.authenticate = true;
-        newUser.url_foto_profesor = "";
         console.log(newUser);
         return done(null, newUser);
       } catch (error) {
