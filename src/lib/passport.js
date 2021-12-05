@@ -60,7 +60,6 @@ passport.use(
         newUser.url_foto_residencia = req.body.url_foto_residencia;
         newUser.url_foto_nacimiento = req.body.url_foto_nacimiento;
         newUser.authenticate = true;
-        console.log(newUser);
         return done(null, newUser);
       } catch (error) {
         console.log(error);

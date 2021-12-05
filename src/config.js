@@ -9,14 +9,14 @@ llaves.GOOGLE = {
 // llaves.API = "http://192.168.0.105:3000";
 // llaves.API = "http://192.168.0.105:4000";
 // llaves.API = "http://localhost:4000";
-llaves.API = "https://prueba-naztec.herokuapp.com";
-// llaves.API = 'https://famircentro.com'
+// llaves.API = "https://prueba-naztec.herokuapp.com";
+llaves.API = 'https://famircentro.com'
 
-// llaves.DATABASE_NAME = "famir_centro";
-// llaves.DATABASE_HOST = "famircentro.com";
-// llaves.DATABASE_USER = "famir";
-// llaves.PASSWORD = "CharlasyCapacitaciones";
-// llaves.PORT = "3306";
+llaves.DATABASE_NAME = "famir_centro";
+llaves.DATABASE_HOST = "famircentro.com";
+llaves.DATABASE_USER = "famir";
+llaves.PASSWORD = "CharlasyCapacitaciones";
+llaves.PORT = "3306";
 
 // llaves.DATABASE_NAME = "bd_famir";
 // llaves.DATABASE_HOST = "localhost";
@@ -24,11 +24,11 @@ llaves.API = "https://prueba-naztec.herokuapp.com";
 // llaves.PASSWORD = "";
 // llaves.PORT = "3306";
 
-llaves.DATABASE_HOST = "bshp5awua7tjh2aywz6d-mysql.services.clever-cloud.com";
-llaves.DATABASE_NAME = "bshp5awua7tjh2aywz6d";
-llaves.DATABASE_USER = "uaxzafx98miaf5l2";
-llaves.PASSWORD = "WwKP6vb4iLzdF3SIL2Ob";
-llaves.PORT = "3306";
+// llaves.DATABASE_HOST = "bshp5awua7tjh2aywz6d-mysql.services.clever-cloud.com";
+// llaves.DATABASE_NAME = "bshp5awua7tjh2aywz6d";
+// llaves.DATABASE_USER = "uaxzafx98miaf5l2";
+// llaves.PASSWORD = "WwKP6vb4iLzdF3SIL2Ob";
+// llaves.PORT = "3306";
 
 //CORREO
 llaves.HOST_EMAIL = "mail.famircentro.com";
